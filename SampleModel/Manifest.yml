@@ -1,0 +1,16 @@
+name: WebSecurityConfigurer
+lead: Template that configures basic websecurity
+version: 0.0.1
+owner: FakeName FakeSurname
+path: /SampleModel
+visibility: PUBLIC
+type: CLASS
+dependencies:
+- lombok
+template:
+  - name: WebSecurityConfigurer.java.mustache
+    preferredLocation: INFRASTRUCTURE
+    context:
+      - name: package_name
+        value:
+      - name: file_name
