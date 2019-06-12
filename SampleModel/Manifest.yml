@@ -8,7 +8,8 @@ type: CLASS
 dependencies:
 - lombok
 template:
-  - name: WebSecurityConfigurer.java.mustache
+  - name: WebSecurityConfigurer
+    filename: WebSecurityConfigurer.java.mustache 
     preferredLocation: INFRASTRUCTURE
     context:
       - name: package_name
