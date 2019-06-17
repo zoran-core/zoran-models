@@ -1,0 +1,17 @@
+name: Dockerfile
+lead: Template contains sample dockerfile for AWS
+version: 0.0.1
+owner: FakeName FakeSurname
+path: /SampleModel2
+visibility: PUBLIC
+type: CLASS
+dependencies:
+template:
+  - name: Dockerfile
+    filename: Dockerfile.mustache
+    preferredLocation: INFRASTRUCTURE
+    context:
+      - name: application_name
+        value:
+      - name: docker_image_name
+        value:

@@ -1,0 +1,82 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "volumes": [
+    {
+      "name": "{{application_name}}",
+      "host": {
+        "sourcePath": "/opt/{{application_name}}/app"
+      }
+    },
+    {
+      "name": "mongo-db",
+      "host": {
+        "sourcePath": "/opt/{{application_name}}/db"
+      }
+    },
+    {
+      "name": "nginx-proxy-conf",
+      "host": {
+        "sourcePath": "/opt/{{application_name}}/nginx/conf.d"
+      }
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "nginx",
+      "image": "nginx:1.13",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": [
+        "zoran-app"
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "{{application_name}}",
+          "containerPath": "/opt/{{application_name}}/dev",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "nginx-proxy-conf",
+          "containerPath": "/opt/{{application_name}}/nginx/conf.d",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "awseb-logs-nginx-proxy",
+          "containerPath": "/opt/{{application_name}}/nginx/log/nginx"
+        }
+      ]
+    },
+    {
+      "name": "{{application_name}}",
+      "image": "{{docker_image_name}}",
+      "essential": true,
+      "memory": 256,
+      "mountPoints": [
+        {
+          "sourceVolume": "{{application_name}}",
+          "containerPath:": "/opt/{{application_name}}/dev",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "name": "mongo-db",
+      "image": "mongo:latest",
+      "essential": true,
+      "memory": 256,
+      "mountPoints": [
+        {
+          "sourceVolume": "{{application_name}}",
+          "containerPath:": "/opt/{{application_name}}/dev",
+          "readOnly": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+name: nginx.conf
+lead: Template that configures basic nginx capabilities
+version: 0.0.1
+owner: FakeName FakeSurname
+path: /SampleModel2
+visibility: PUBLIC
+type: CLASS
+dependencies:
+template:
+  - name: Nginx Configuration File
+    filename: nginx.conf.mustache
+    preferredLocation: INFRASTRUCTURE
+    context:
+      - name: listening_port
+        value:
+      - name: application_name
+        value:
+      - name: application_port
+        value:
